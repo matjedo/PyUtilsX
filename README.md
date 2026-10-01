@@ -22,6 +22,20 @@ A file integrity and hash checking utility.
 - Verification reports
 - Tkinter-based graphical interface
 
+### 🔐 Cipher++
+
+Cipher++ is a PyUtilsX utility focused on **encoding, decoding, and hash generation**.
+
+With Cipher++, you can:
+
+- Encode and decode text using different methods
+- Work with various cipher and encoding formats
+- Generate hashes from text and data
+- Quickly copy generated results
+- Use multiple text and security utilities in one place
+
+The goal of Cipher++ is to provide a simple and centralized toolkit for working with **text, encodings, ciphers, and hashes**, without requiring multiple websites or applications.
+
 ## 🚀 How It Works
 
 PyUtilsX works as a launcher for its tools:
@@ -34,6 +48,8 @@ PyUtilsX
 └── apps
     └── FileX
         └── main.py
+        Cipher++
+        └── main.py
 ```
 
 New tools can be added inside the `apps` folder without modifying the launcher.
@@ -43,7 +59,7 @@ New tools can be added inside the `apps` folder without modifying the launcher.
 Download the latest installer from the project's **Releases** page and run:
 
 ```text
-PyUtilsX-Setup-v1.0.0.exe
+PyUtilsX-Setup-v1.1.0.exe
 ```
 
 The installer will automatically set up PyUtilsX on your system.
@@ -85,6 +101,8 @@ dist/
 └── apps/
     └── FileX/
         └── main.py
+        Cipher++
+        └── main.py
 ```
 
 ## 🧩 Adding a Tool
@@ -119,7 +137,7 @@ The goal of PyUtilsX is to build a collection of **simple, useful, and lightweig
 - [x] MD5
 - [x] Hash comparison
 - [x] Windows installer
-- [ ] More utilities
+- [x] More utilities
 - [ ] Update system
 - [ ] Individual tool icons
 - [ ] Better application management
