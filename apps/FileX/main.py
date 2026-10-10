@@ -21,7 +21,7 @@ class FileX:
         self.create_ui()
 
     # =========================
-    # ESTILO
+    # STYLE
     # =========================
 
     def setup_style(self):
@@ -85,7 +85,7 @@ class FileX:
         )
 
     # =========================
-    # INTERFACE
+    # USER INTERFACE
     # =========================
 
     def create_ui(self):
@@ -113,14 +113,14 @@ class FileX:
 
         ttk.Button(
             main,
-            text="Selecionar arquivo",
+            text="Select File",
             style="Accent.TButton",
             command=self.select_file
         ).pack()
 
         self.file_label = ttk.Label(
             main,
-            text="Nenhum arquivo selecionado",
+            text="No file selected",
             style="Subtitle.TLabel"
         )
 
@@ -130,7 +130,7 @@ class FileX:
 
         self.size_label = ttk.Label(
             main,
-            text="Tamanho: —",
+            text="Size: —",
             style="Subtitle.TLabel"
         )
 
@@ -139,7 +139,7 @@ class FileX:
         )
 
         # =========================
-        # CARD DE HASHES
+        # HASHES CARD
         # =========================
 
         card = ttk.Frame(
@@ -169,7 +169,7 @@ class FileX:
             )
 
         # =========================
-        # SEPARADOR
+        # SEPARATOR
         # =========================
 
         ttk.Separator(
@@ -182,18 +182,18 @@ class FileX:
         )
 
         # =========================
-        # COMPARAÇÃO
+        # HASH COMPARISON
         # =========================
 
         ttk.Label(
             main,
-            text="Comparar hash",
+            text="Compare Hash",
             font=("Segoe UI", 14, "bold")
         ).pack()
 
         ttk.Label(
             main,
-            text="Cole o hash esperado para verificar a integridade do arquivo.",
+            text="Paste the expected hash to verify file integrity.",
             style="Subtitle.TLabel"
         ).pack(
             pady=(3, 12)
@@ -241,7 +241,7 @@ class FileX:
 
         ttk.Button(
             main,
-            text="Verificar",
+            text="Verify",
             style="Accent.TButton",
             command=self.compare_hash
         ).pack(
@@ -265,7 +265,7 @@ class FileX:
         )
 
     # =========================
-    # LINHA DE HASH
+    # HASH ROW
     # =========================
 
     def create_hash_row(self, parent, algorithm):
@@ -300,7 +300,7 @@ class FileX:
 
         ttk.Button(
             row,
-            text="Copiar",
+            text="Copy",
             command=lambda a=algorithm: self.copy_hash(a)
         ).pack(
             side="right"
@@ -309,12 +309,12 @@ class FileX:
         self.hash_entries[algorithm] = entry
 
     # =========================
-    # SELECIONAR ARQUIVO
+    # SELECT FILE
     # =========================
 
     def select_file(self):
         path = filedialog.askopenfilename(
-            title="Selecionar arquivo"
+            title="Select File"
         )
 
         if not path:
@@ -329,13 +329,13 @@ class FileX:
         size = self.file_path.stat().st_size
 
         self.size_label.config(
-            text=f"Tamanho: {self.format_size(size)}"
+            text=f"Size: {self.format_size(size)}"
         )
 
         self.calculate_hashes()
 
     # =========================
-    # CALCULAR HASHES
+    # CALCULATE HASHES
     # =========================
 
     def calculate_hashes(self):
@@ -402,19 +402,19 @@ class FileX:
             self.hash_times["total"] = total_time
 
             self.result_label.config(
-                text=f"Hashes calculados em {total_time:.3f} segundos."
+                text=f"Hashes calculated in {total_time:.3f} seconds."
             )
 
         except Exception as error:
 
             messagebox.showerror(
                 "FileX",
-                "Não foi possível calcular os hashes.\n\n"
+                "Unable to calculate hashes.\n\n"
                 f"{error}"
             )
 
     # =========================
-    # COPIAR HASH
+    # COPY HASH
     # =========================
 
     def copy_hash(self, algorithm):
@@ -430,11 +430,11 @@ class FileX:
         self.root.update()
 
         self.result_label.config(
-            text=f"{algorithm} copiado!"
+            text=f"{algorithm} copied!"
         )
 
     # =========================
-    # COMPARAR HASH
+    # COMPARE HASH
     # =========================
 
     def compare_hash(self):
@@ -442,7 +442,7 @@ class FileX:
         if not self.file_path:
             messagebox.showwarning(
                 "FileX",
-                "Selecione um arquivo primeiro."
+                "Please select a file first."
             )
             return
 
@@ -456,7 +456,7 @@ class FileX:
         if not expected:
             messagebox.showwarning(
                 "FileX",
-                "Digite o hash esperado."
+                "Please enter the expected hash."
             )
             return
 
@@ -467,7 +467,7 @@ class FileX:
             ""
         ).lower()
 
-        # Tempo da comparação
+        # Measure comparison time
         start_time = time.perf_counter()
 
         matches = (
@@ -480,10 +480,10 @@ class FileX:
         )
 
         if matches:
-            result = "✓ HASHES CORRESPONDEM"
+            result = "✓ HASHES MATCH"
             result_color = "#107c10"
         else:
-            result = "✕ HASHES DIFERENTES"
+            result = "✕ HASHES DO NOT MATCH"
             result_color = "#c42b1c"
 
         self.result_label.config(
@@ -497,32 +497,32 @@ class FileX:
         )
 
         report = (
-            "FILEX — RELATÓRIO DE VERIFICAÇÃO\n"
+            "FILEX — VERIFICATION REPORT\n"
             "══════════════════════════════════\n\n"
 
-            f"Arquivo:\n"
+            f"File:\n"
             f"{self.file_path.name}\n\n"
 
-            f"Tamanho:\n"
+            f"Size:\n"
             f"{self.format_size(self.file_path.stat().st_size)}\n\n"
 
-            f"Algoritmo:\n"
+            f"Algorithm:\n"
             f"{algorithm}\n\n"
 
-            f"Hash esperado:\n"
+            f"Expected Hash:\n"
             f"{expected}\n\n"
 
-            f"Hash calculado:\n"
+            f"Calculated Hash:\n"
             f"{actual}\n\n"
 
-            f"Resultado:\n"
+            f"Result:\n"
             f"{result}\n\n"
 
-            f"Tempo para calcular os hashes:\n"
-            f"{total_hash_time:.6f} segundos\n\n"
+            f"Hash Calculation Time:\n"
+            f"{total_hash_time:.6f} seconds\n\n"
 
-            f"Tempo da comparação:\n"
-            f"{comparison_time:.9f} segundos"
+            f"Comparison Time:\n"
+            f"{comparison_time:.9f} seconds"
         )
 
         self.show_report(
@@ -531,15 +531,15 @@ class FileX:
         )
 
         # =========================
-        # MSG DO WINDOWS
+        # WINDOWS MESSAGE
         # =========================
 
         try:
 
             message = (
                 f"FileX: {result}\n"
-                f"Arquivo: {self.file_path.name}\n"
-                f"Tempo: {total_hash_time:.3f}s"
+                f"File: {self.file_path.name}\n"
+                f"Time: {total_hash_time:.3f}s"
             )
 
             subprocess.run(
@@ -552,12 +552,12 @@ class FileX:
             )
 
         except Exception:
-            # Se o comando msg não estiver disponível,
-            # o FileX continua funcionando normalmente.
+            # If the msg command is unavailable,
+            # FileX continues working normally.
             pass
 
     # =========================
-    # JANELA DE RELATÓRIO
+    # REPORT WINDOW
     # =========================
 
     def show_report(self, report, success):
@@ -567,7 +567,7 @@ class FileX:
         )
 
         window.title(
-            "FileX — Relatório"
+            "FileX — Report"
         )
 
         window.geometry(
@@ -585,17 +585,17 @@ class FileX:
 
         ttk.Label(
             window,
-            text="Relatório de verificação",
+            text="Verification Report",
             font=("Segoe UI", 18, "bold")
         ).pack(
             pady=(25, 5)
         )
 
         status_text = (
-            "Arquivo verificado com sucesso"
+            "File verified successfully"
             if success
             else
-            "O hash não corresponde ao esperado"
+            "The hash does not match the expected value"
         )
 
         status_color = (
@@ -648,14 +648,14 @@ class FileX:
 
         ttk.Button(
             window,
-            text="Fechar",
+            text="Close",
             command=window.destroy
         ).pack(
             pady=15
         )
 
     # =========================
-    # TAMANHO DO ARQUIVO
+    # FILE SIZE
     # =========================
 
     @staticmethod
@@ -680,7 +680,7 @@ class FileX:
 
 
 # =========================
-# INICIAR FILEX
+# START FILEX
 # =========================
 
 if __name__ == "__main__":
