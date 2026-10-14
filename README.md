@@ -83,14 +83,7 @@ python -m pip install pyinstaller
 Build the launcher:
 
 ```bash
-pyinstaller --noconfirm --clean --onefile --windowed --name PyUtilsX ^
---hidden-import=tkinter.filedialog ^
---hidden-import=tkinter.messagebox ^
---hidden-import=tkinter.ttk ^
---hidden-import=tkinter.simpledialog ^
---hidden-import=tkinter.colorchooser ^
---hidden-import=tkinter.font ^
-main.py
+pyinstaller --noconfirm --clean --onefile --windowed --icon="assets/pyutilsx.ico" --name PyUtilsX --hidden-import=tkinter.filedialog --hidden-import=tkinter.messagebox  --hidden-import=queue --hidden-import=tkinter.ttk main.py
 ```
 
 After building, place the `apps` folder next to the executable:
